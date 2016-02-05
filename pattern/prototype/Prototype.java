@@ -1,37 +1,45 @@
 package pattern.prototype;
 
-interface Copyable{
-	Copyable copy();
-}
-
-class ComplicatedObject implements Copyable{
-	private Type type;
-	
-	public enum Type {
-	    ONE, TWO
-	  }
-	
-	public ComplicatedObject copy() {
-		return new ComplicatedObject();
-	}
-	
-	public void setType(Type type) {
-	    this.type = type;
-	  }
-}
-
 public class Prototype {
 
 	public static void main(String[] args) {
 		
-		 ComplicatedObject prototype = new ComplicatedObject();
-		 
-		 ComplicatedObject clone = prototype.copy();
-		 
-		 clone.setType(ComplicatedObject.Type.ONE);
+		Human original = new Human(21, "Petia");
+		System.out.println(original);
+		
+		Human copy = (Human)original.copy();
+		System.out.println(copy);
+
 
 	}
-
 }
+
+interface Copyable{
+	Object copy();
+}
+
+class Human implements Copyable{
+	int age;
+	String name;
+	
+	@Override
+	public String toString() {
+		return "Human [age=" + age + ", name=" + name + "]";
+	}
+
+	public Human(int age, String name) {
+		super();
+		this.age = age;
+		this.name = name;
+	}
+
+	public Copyable copy() {
+		Human copy = new Human(age, name);
+		return copy;
+	}
+	
+}
+
+
 
 
